@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document1</title>
+  <style>
+
+    * {
+      font-weight: bold;
+    }
+
+    .tiles {
+      display: flex;
+    }
+
+    .tile {
+      width: 50px;
+      height: 50px;
+      background-color: rgb(110, 178, 125);
+      margin: 5px;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .active {
+      background-color: red;
+    }
+
+    #win {
+      /* display: block; */
+      background-color: rgb(54, 223, 57);
+      /* width: 50px;
+      height: 50px; */
+    }
+
+    .field {
+      background-color: rgb(236, 226, 118);
+      width: 600px;
+      height: 300px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field_cell {
+      background-color: rgb(221, 80, 80);
+      border: 1px solid black;
+      width: 98px;
+      height: 90px;
+      /* margin: 5px; */
+    }
+
+    .number {
+      background-color: rgba(214, 242, 129, 0.2);
+      font-size: 20px;
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: 25px;
+    }
+
+
+
+    .bigbet {
+      width: 49%;
+    }
+
+    .bets {
+      display: flex;
+    }
+
+    .current-bet {
+      /* display: block; */
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      text-align: center;
+      line-height: 50px;
+      background-color: rgb(178, 119, 255);
+    }
+
+    .bottom-menu {
+      display: flex;
+      width: 600px;
+      justify-content: space-between;
+    }
+
+    .cash {
+      background-color: rgb(255, 232, 24);
+      padding: 20px 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="tiles">
+    <div class="tile" id="1">1</div>
+    <div class="tile" id="2">2</div>
+    <div class="tile" id="3">3</div>
+    <div class="tile" id="4">4</div>
+    <div class="tile" id="5">5</div>
+    <div class="tile" id="6">6</div>
+    <div class="tile" id="7">7</div>
+    <div class="tile" id="8">8</div>
+    <div class="tile" id="9">9</div>
+    <div class="tile" id="10">10</div>
+  </div>
+
+  <div class="field">
+    <div class="field_cell bigbet">
+      <p class="number">1</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">2</span>
+    </div>
+    <div class="field_cell bigbet">
+      <p class="number">2</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">4</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">3</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">6</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">4</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">8</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">5</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">12</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">6</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">21</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">7</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">1</span>
+    </div>
+    <div class="field_cell">
+      <p class="number">8</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">3</span>
+    </div>
+
+    <div class="field_cell bigbet">
+      <p class="number">9</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">10</span>
+    </div>
+    <div class="field_cell bigbet">
+      <p class="number">10</p>
+      <span class="multiple">×</span>
+      <span class="multiplier">15</span>
+    </div>
+  </div>
+
+  <button id="start">Start</button>
+
+  <div>Won number: <span id="win"></span> </div>
+
+  <div class="bottom-menu">
+    <div class="bets">
+      <div class="current-bet">1</div>
+      <div class="current-bet">10</div>
+      <div class="current-bet">50</div>
+      <div class="current-bet">100</div>
+      <div class="current-bet">500</div>
+    </div>
+
+    <div class="cash">100 000</div>
+  </div>
+
+
+  <script>
+    const tiles = document.querySelectorAll('.tiles div')
+    const start = document.getElementById('start');
+    const win = document.getElementById('win');
+    const bets = document.querySelectorAll('.field_cell')
+
+    console.log(start);
+
+    start.addEventListener('click', () => wave(tiles, 2, randomWave));
+
+    async function wave(arr, times, cb) {
+      for (elem of arr) {
+        if (elem.classList.contains('active')) {
+          elem.classList.remove('active')
+        }
+      }
+      for (let n = 0; n < times; n++) {
+        for (item of arr) {
+          let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve(item), 200)
+          });
+
+          let result = await promise;
+          flash(result)
+
+        }
+      }
+
+      cb(arr)
+
+    }
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function flash(elem) {
+      elem.classList.add('active');
+      setTimeout(() => {
+        elem.classList.remove('active');
+      }, 250);
+    };
+
+    function randomWave(arr) {
+      for (elem of arr) {
+        if (elem.classList.contains('active')) {
+          elem.classList.remove('active')
+        }
+      }
+      let num = randomInt(0, arr.length - 1);
+      for (let i = 0; i <= num; i++) {
+        setTimeout(() => {
+          if (i != num) {
+            flash(arr[i])
+          } else {
+            arr[i].classList.add('active')
+            win.innerHTML = '<b>' + arr[i].innerHTML + '</b>';
+            console.log(i);
+            temp = i;
+          }
+        }, 250 * i);
+      }
+    }
+
+    let temp;
+
+
+
+  </script>
+</body>
+
+</html>
