@@ -46,6 +46,7 @@
     }
 
     .field_cell {
+      position: relative;
       background-color: rgb(221, 80, 80);
       border: 1px solid black;
       width: 98px;
@@ -60,6 +61,16 @@
       margin: 0 auto;
       text-align: center;
       padding-bottom: 25px;
+    }
+
+    .show-bet {
+      background-color: #fff;
+      /* opacity: 0.2; */
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
     }
 
 
@@ -124,6 +135,7 @@
       <p class="number">1</p>
       <span class="multiple">×</span>
       <span class="multiplier">2</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell bigbet">
       <p class="number">2</p>
@@ -266,6 +278,17 @@
       tempBetValue = Number(bet.innerHTML);
       console.log(tempBetValue);
     }
+
+    for (let field of fields) {
+      field.addEventListener('click', () => addBetToField(field))
+    }
+
+    function addBetToField(field) {
+      let child = field.querySelector('.show-bet');
+      console.log(child.parentElement);
+      child.innerHTML = tempBetValue;
+    }
+
 
   </script>
 </body>
