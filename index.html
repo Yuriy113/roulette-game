@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document1</title>
   <style>
-
     * {
       font-weight: bold;
     }
@@ -81,6 +80,15 @@
       text-align: center;
       line-height: 50px;
       background-color: rgb(178, 119, 255);
+      cursor: pointer;
+    }
+
+    .current-bet:hover {
+      background-color: rgb(223, 15, 15);
+      /* transition: all 0.2s ease-in-out; */
+    }
+    .current-bet:active {
+      background-color: rgb(223, 150, 15);
     }
 
     .bottom-menu {
@@ -186,7 +194,8 @@
     const tiles = document.querySelectorAll('.tiles div')
     const start = document.getElementById('start');
     const win = document.getElementById('win');
-    const bets = document.querySelectorAll('.field_cell')
+    const fields = document.querySelectorAll('.field_cell')
+    const bets = document.querySelectorAll('.current-bet')
 
     console.log(start);
 
@@ -240,15 +249,23 @@
             arr[i].classList.add('active')
             win.innerHTML = '<b>' + arr[i].innerHTML + '</b>';
             console.log(i);
-            temp = i;
+            tempWonNumber = i;
           }
         }, 250 * i);
       }
     }
 
-    let temp;
+    let tempWonNumber;
+    let tempBetValue;
 
+    for (let bet of bets) {
+      bet.addEventListener('click', () => betSelect(bet))
+    }
 
+    function betSelect(bet) {
+      tempBetValue = Number(bet.innerHTML);
+      console.log(tempBetValue);
+    }
 
   </script>
 </body>
