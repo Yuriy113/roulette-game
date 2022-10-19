@@ -60,7 +60,7 @@
       display: block;
       margin: 0 auto;
       text-align: center;
-      padding-bottom: 25px;
+      padding-bottom: 18px;
     }
 
     .show-bet {
@@ -211,14 +211,14 @@
     <div class="cash">100000</div>
   </div>
 
-
-  <script>
-    const tiles = document.querySelectorAll('.tiles div')
-    const start = document.getElementById('start');
-    const win = document.getElementById('win');
-    const fields = document.querySelectorAll('.field_cell')
-    const bets = document.querySelectorAll('.current-bet')
-    const cash = document.querySelector('.cash');
+<script src="./script.js"></script>
+  <!-- <script>
+    const tiles = document.querySelectorAll('.tiles div'),
+          start = document.getElementById('start'),
+          win = document.getElementById('win'),
+          fields = document.querySelectorAll('.field_cell'),
+          bets = document.querySelectorAll('.current-bet'),
+          cash = document.querySelector('.cash');
 
     start.addEventListener('click', () => wave(tiles, 2, randomWave));
 
@@ -255,8 +255,6 @@
       }, 250);
     };
 
-    // let remainingCash = Number(cash.innerHTML);
-
     function randomWave(arr) {
       for (elem of arr) {
         if (elem.classList.contains('active')) {
@@ -271,7 +269,7 @@
           } else {
             arr[i].classList.add('active')
             win.innerHTML = '<b>' + arr[i].innerHTML + '</b>';
-            tempWonNumber = i+1;
+            tempWonNumber = i + 1;
             let remainingCash = Number(cash.innerHTML);
             // let newCashValue = remainingCash + getWin();
             cash.innerHTML = remainingCash + getWin();
@@ -298,13 +296,18 @@
     }
 
     function addBetToField(field) {
+
+      for (const field of fields) {
+        let child = field.querySelector('.show-bet');
+        child.innerHTML = '';
+      }
+
       if (tempBetValue) {
         let child = field.querySelector('.show-bet');
         child.innerHTML = tempBetValue;
         currentField = Number(field.querySelector('.number').innerHTML);
         currentMultiplier = Number(field.querySelector('.multiplier').innerHTML);
       }
-
     }
 
     function getWin() {
@@ -319,7 +322,7 @@
       }
     }
 
-  </script>
+  </script> -->
 </body>
 
 </html>
