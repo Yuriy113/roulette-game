@@ -98,6 +98,7 @@
       background-color: rgb(223, 15, 15);
       /* transition: all 0.2s ease-in-out; */
     }
+
     .current-bet:active {
       background-color: rgb(223, 150, 15);
     }
@@ -141,47 +142,56 @@
       <p class="number">2</p>
       <span class="multiple">×</span>
       <span class="multiplier">4</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">3</p>
       <span class="multiple">×</span>
       <span class="multiplier">6</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">4</p>
       <span class="multiple">×</span>
       <span class="multiplier">8</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">5</p>
       <span class="multiple">×</span>
       <span class="multiplier">12</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">6</p>
       <span class="multiple">×</span>
       <span class="multiplier">21</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">7</p>
       <span class="multiple">×</span>
       <span class="multiplier">1</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell">
       <p class="number">8</p>
       <span class="multiple">×</span>
       <span class="multiplier">3</span>
+      <div class="show-bet"></div>
     </div>
 
     <div class="field_cell bigbet">
       <p class="number">9</p>
       <span class="multiple">×</span>
       <span class="multiplier">10</span>
+      <div class="show-bet"></div>
     </div>
     <div class="field_cell bigbet">
       <p class="number">10</p>
       <span class="multiple">×</span>
       <span class="multiplier">15</span>
+      <div class="show-bet"></div>
     </div>
   </div>
 
@@ -198,7 +208,7 @@
       <div class="current-bet">500</div>
     </div>
 
-    <div class="cash">100 000</div>
+    <div class="cash">100000</div>
   </div>
 
 
@@ -208,8 +218,7 @@
     const win = document.getElementById('win');
     const fields = document.querySelectorAll('.field_cell')
     const bets = document.querySelectorAll('.current-bet')
-
-    console.log(start);
+    const cash = document.querySelector('.cash');
 
     start.addEventListener('click', () => wave(tiles, 2, randomWave));
 
@@ -227,7 +236,7 @@
 
           let result = await promise;
           flash(result)
-
+          getWin();
         }
       }
 
@@ -246,6 +255,8 @@
       }, 250);
     };
 
+    // let remainingCash = Number(cash.innerHTML);
+
     function randomWave(arr) {
       for (elem of arr) {
         if (elem.classList.contains('active')) {
@@ -260,8 +271,10 @@
           } else {
             arr[i].classList.add('active')
             win.innerHTML = '<b>' + arr[i].innerHTML + '</b>';
-            console.log(i);
-            tempWonNumber = i;
+            tempWonNumber = i+1;
+            let remainingCash = Number(cash.innerHTML);
+            // let newCashValue = remainingCash + getWin();
+            cash.innerHTML = remainingCash + getWin();
           }
         }, 250 * i);
       }
@@ -269,6 +282,8 @@
 
     let tempWonNumber;
     let tempBetValue;
+    let currentField;
+    let currentMultiplier;
 
     for (let bet of bets) {
       bet.addEventListener('click', () => betSelect(bet))
@@ -276,7 +291,6 @@
 
     function betSelect(bet) {
       tempBetValue = Number(bet.innerHTML);
-      console.log(tempBetValue);
     }
 
     for (let field of fields) {
@@ -284,11 +298,26 @@
     }
 
     function addBetToField(field) {
-      let child = field.querySelector('.show-bet');
-      console.log(child.parentElement);
-      child.innerHTML = tempBetValue;
+      if (tempBetValue) {
+        let child = field.querySelector('.show-bet');
+        child.innerHTML = tempBetValue;
+        currentField = Number(field.querySelector('.number').innerHTML);
+        currentMultiplier = Number(field.querySelector('.multiplier').innerHTML);
+      }
+
     }
 
+    function getWin() {
+      if (tempBetValue && tempWonNumber) {
+        if (tempWonNumber == currentField) {
+          let plus = tempBetValue * currentMultiplier;
+          return plus;
+        } else {
+          let minus = -(tempBetValue)
+          return minus;
+        }
+      }
+    }
 
   </script>
 </body>
