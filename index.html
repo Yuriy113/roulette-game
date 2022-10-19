@@ -5,115 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document1</title>
-  <style>
-    * {
-      font-weight: bold;
-    }
-
-    .tiles {
-      display: flex;
-    }
-
-    .tile {
-      width: 50px;
-      height: 50px;
-      background-color: rgb(110, 178, 125);
-      margin: 5px;
-      text-align: center;
-      line-height: 50px;
-    }
-
-    .active {
-      background-color: red;
-    }
-
-    #win {
-      /* display: block; */
-      background-color: rgb(54, 223, 57);
-      /* width: 50px;
-      height: 50px; */
-    }
-
-    .field {
-      background-color: rgb(236, 226, 118);
-      width: 600px;
-      height: 300px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .field_cell {
-      position: relative;
-      background-color: rgb(221, 80, 80);
-      border: 1px solid black;
-      width: 98px;
-      height: 90px;
-      /* margin: 5px; */
-    }
-
-    .number {
-      background-color: rgba(214, 242, 129, 0.2);
-      font-size: 20px;
-      display: block;
-      margin: 0 auto;
-      text-align: center;
-      padding-bottom: 18px;
-    }
-
-    .show-bet {
-      background-color: #fff;
-      /* opacity: 0.2; */
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-
-
-
-    .bigbet {
-      width: 49%;
-    }
-
-    .bets {
-      display: flex;
-    }
-
-    .current-bet {
-      /* display: block; */
-      width: 50px;
-      height: 50px;
-      margin: 5px;
-      text-align: center;
-      line-height: 50px;
-      background-color: rgb(178, 119, 255);
-      cursor: pointer;
-    }
-
-    .current-bet:hover {
-      background-color: rgb(223, 15, 15);
-      /* transition: all 0.2s ease-in-out; */
-    }
-
-    .current-bet:active {
-      background-color: rgb(223, 150, 15);
-    }
-
-    .bottom-menu {
-      display: flex;
-      width: 600px;
-      justify-content: space-between;
-    }
-
-    .cash {
-      background-color: rgb(255, 232, 24);
-      padding: 20px 20px 0;
-    }
-  </style>
+  <link rel="stylesheet" href="./ctyles.css">
+  <title>Roulette</title>
 </head>
 
 <body>
@@ -195,7 +88,7 @@
     </div>
   </div>
 
-  <button id="start">Start</button>
+  <button id="start">Start game</button>
 
   <div>Won number: <span id="win"></span> </div>
 

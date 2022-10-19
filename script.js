@@ -92,6 +92,7 @@ function addBetToField(field) {
   }
 }
 
+
 function getWin() {
   if (tempBetValue && tempWonNumber) {
     if (tempWonNumber == currentField) {
