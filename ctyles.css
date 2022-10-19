@@ -2,6 +2,15 @@
   font-weight: bold;
 }
 
+.container {
+  width: 600px;
+}
+
+#start {
+  display: block;
+  margin: 10px auto;
+}
+
 .tiles {
   display: flex;
 }
@@ -56,7 +65,6 @@
 
 .show-bet {
   background-color: #fff;
-  /* opacity: 0.2; */
   width: 50px;
   height: 50px;
   position: absolute;
@@ -75,19 +83,18 @@
 }
 
 .current-bet {
-  /* display: block; */
+  border-radius: 50%;
   width: 50px;
   height: 50px;
   margin: 5px;
   text-align: center;
   line-height: 50px;
-  background-color: rgb(178, 119, 255);
+  background-color: rgb(255, 149, 0);
   cursor: pointer;
 }
 
 .current-bet:hover {
   background-color: rgb(223, 15, 15);
-  /* transition: all 0.2s ease-in-out; */
 }
 
 .current-bet:active {
@@ -101,6 +108,14 @@
 }
 
 .cash {
-  background-color: rgb(255, 232, 24);
+  background-color: rgb(24, 255, 74);
   padding: 20px 20px 0;
+}
+
+.true {
+  color: blue;
+}
+
+.false {
+  color: red;
 }

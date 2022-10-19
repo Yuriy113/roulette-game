@@ -1,10 +1,10 @@
 
-const tiles = document.querySelectorAll('.tiles div'),
-      start = document.getElementById('start'),
-      win = document.getElementById('win'),
+const tiles  = document.querySelectorAll('.tiles div'),
+      start  = document.getElementById('start'),
+      win    = document.getElementById('win'),
       fields = document.querySelectorAll('.field_cell'),
-      bets = document.querySelectorAll('.current-bet'),
-      cash = document.querySelector('.cash');
+      bets   = document.querySelectorAll('.current-bet'),
+      cash   = document.querySelector('.cash');
 
 start.addEventListener('click', () => wave(tiles, 2, randomWave));
 
@@ -104,4 +104,22 @@ function getWin() {
     }
   }
 }
+
+
+
+
+// let counter = 0;
+// let interval = setInterval(() => {
+//   cash.classList.add('false')
+//   counter++;
+//   console.log(counter);
+//   if (counter == 5) {
+//     clearInterval(interval)
+//   }
+//   setTimeout(() => {
+//     cash.classList.remove('false')
+//   }, 250)
+// }, 500);
+
+
 
